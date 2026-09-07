@@ -30,6 +30,7 @@ MODULES = [
     ("Rights and Responsibilities", range(1, 8)),
     ("Governance and Operational Management", range(8, 16)),
     ("Provision of Supports", range(16, 19)),
+    ("Access and Intake", range(33, 34)),
     ("Support Provision Environment", range(19, 21)),
     ("Workforce and Conduct", range(21, 33)),
 ]
