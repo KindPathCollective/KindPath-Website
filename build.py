@@ -17,6 +17,9 @@ POLICIES_SRC = ROOT / "content" / "policies"
 POLICIES_OUT = ROOT / "policies"
 POLICIES_OUT.mkdir(exist_ok=True)
 
+# Public contact email, used in the footer and on the Contact page.
+EMAIL = "info@kindpathcollective.org"
+
 NAV = [
     ("index.html", "Home"),
     ("about.html", "About"),
@@ -96,7 +99,7 @@ def page(title: str, body: str, active: str = "", description: str = "") -> str:
     <div class="footer-contact">
       <p>Bundjalung Country, Northern NSW</p>
       <p>Nimbin NSW</p>
-      <p><a href="mailto:sam@kindpathcollective.org">sam@kindpathcollective.org</a></p>
+      <p><a href="mailto:{EMAIL}">{EMAIL}</a></p>
       <p>ABN 29 486 496 313</p>
     </div>
   </div>
@@ -300,7 +303,7 @@ def build_services():
 
 
 def build_contact():
-    body = """
+    body = f"""
 <section class="section page-header">
   <div class="container">
     <h1>Get in touch</h1>
@@ -315,7 +318,7 @@ def build_contact():
     <ul class="pathway-list">
       <li><strong>Already working with a service?</strong> Ask your support worker, support coordinator, case manager or GP to refer you to KindPath.</li>
       <li><strong>Not connected to any service yet?</strong> A local community service or your GP can talk with you about what you need and refer you on. For disability supports, the <a href="get-help.html">Disability Gateway</a> is a good first call. If you can&rsquo;t find anyone to refer you, email us and we&rsquo;ll help you find a way in.</li>
-      <li><strong>Referring someone?</strong> Services, family members and carers can all refer. Email <a href="mailto:sam@kindpathcollective.org?subject=Referral">sam@kindpathcollective.org</a> with &ldquo;Referral&rdquo; in the subject. Please make sure the person knows about and agrees to the referral before you send their details.</li>
+      <li><strong>Referring someone?</strong> Services, family members and carers can all refer. Email <a href="mailto:{EMAIL}?subject=Referral">{EMAIL}</a> with &ldquo;Referral&rdquo; in the subject. Please make sure the person knows about and agrees to the referral before you send their details.</li>
     </ul>
     <p>If we&rsquo;re not the right fit, or our caseload is full, we&rsquo;ll tell you honestly and help point to someone who is.</p>
 
@@ -324,7 +327,7 @@ def build_contact():
 
     <h2>Contact details</h2>
     <ul class="contact-list">
-      <li><strong>Email:</strong> <a href="mailto:sam@kindpathcollective.org">sam@kindpathcollective.org</a></li>
+      <li><strong>Email:</strong> <a href="mailto:{EMAIL}">{EMAIL}</a></li>
       <li><strong>Location:</strong> Nimbin NSW (Bundjalung Country)</li>
       <li><strong>ABN:</strong> 29 486 496 313</li>
     </ul>
