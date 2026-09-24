@@ -95,7 +95,7 @@ def page(title: str, body: str, active: str = "", description: str = "") -> str:
     </div>
     <div class="footer-contact">
       <p>Bundjalung Country, Northern NSW</p>
-      <p>557 Tuntable Falls Road, Nimbin NSW</p>
+      <p>Nimbin NSW</p>
       <p><a href="mailto:sam@kindpathcollective.org">sam@kindpathcollective.org</a></p>
       <p>ABN 29 486 496 313</p>
     </div>
@@ -325,7 +325,7 @@ def build_contact():
     <h2>Contact details</h2>
     <ul class="contact-list">
       <li><strong>Email:</strong> <a href="mailto:sam@kindpathcollective.org">sam@kindpathcollective.org</a></li>
-      <li><strong>Location:</strong> 557 Tuntable Falls Road, Nimbin NSW (Bundjalung Country)</li>
+      <li><strong>Location:</strong> Nimbin NSW (Bundjalung Country)</li>
       <li><strong>ABN:</strong> 29 486 496 313</li>
     </ul>
     <h2>Want to make a complaint or give feedback?</h2>
