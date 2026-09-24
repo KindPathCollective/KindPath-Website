@@ -2,7 +2,7 @@
 
 # Service and Client Matching Policy
 
-Version 1.1 | Effective: [date approved by Director] | Review: 7 September 2027 | Owner: Director
+Version 1.1 | Effective: 24 September 2026 | Review: 24 September 2027 | Owner: Director
 
 ## 1. Purpose
 
@@ -61,4 +61,4 @@ Annually, and immediately on any material change to KindPath's capacity (a new w
 | Version | Date | Change | Reason | Approved |
 | --- | --- | --- | --- | --- |
 | 1.0 | 7 September 2026 | First issue. | — | Director |
-| 1.1 | [date] | Initial contact changed from open contact (including self-referral) to referral-based, with family members and carers able to refer. Added referrer consent, help for people who make direct contact, a recorded Director exception for direct requests, and logging and review of direct contacts. | KindPath keeps a deliberately small caseload so it can stay with each person over time. The public website was updated on 24 September 2026 to describe the referral pathway, and this policy must match what is published (section 3). | Director, noted for committee ratification once active |
+| 1.1 | 24 September 2026 | Initial contact changed from open contact (including self-referral) to referral-based, with family members and carers able to refer. Added referrer consent, help for people who make direct contact, a recorded Director exception for direct requests, and logging and review of direct contacts. | KindPath keeps a deliberately small caseload so it can stay with each person over time. The public website was updated on 24 September 2026 to describe the referral pathway, and this policy must match what is published (section 3). | Director, noted for committee ratification once active |
