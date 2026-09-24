@@ -2,7 +2,7 @@
 
 # Service and Client Matching Policy
 
-Version 1.1 | Effective: 24 September 2026 | Review: 7 September 2027 | Owner: Director
+Version 1.1 | Effective: 24 September 2026 | Review: 24 September 2027 | Owner: Director
 
 ## 1. Purpose
 
