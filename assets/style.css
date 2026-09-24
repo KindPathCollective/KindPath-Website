@@ -95,3 +95,18 @@ h3 { font-size: 18px; margin: 0 0 8px; }
   .site-nav { flex-wrap: wrap; justify-content: center; }
   .hero h1 { font-size: 34px; }
 }
+
+/* ---- Urgent help banner + Get Help page (added 24 Sep 2026) ---- */
+.crisis-banner { background: var(--navy-dark); color: #fff; font-size: 14px; }
+.crisis-banner p { margin: 0; padding: 9px 0; text-align: center; }
+.crisis-banner a { color: var(--gold); font-weight: 600; }
+.crisis-banner a:focus-visible, .site-nav a:focus-visible, .btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.help-list { list-style: none; padding: 0; margin: 0 0 24px; }
+.help-list li { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.help-list strong { color: var(--navy); }
+.help-list a[href^="tel"] { font-weight: 700; white-space: nowrap; }
+.help-list span { display: block; color: var(--muted); font-size: 14px; }
+.callout { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 10px; padding: 18px 22px; margin: 24px 0; }
+.pathway-list { padding-left: 22px; }
+.pathway-list li { margin-bottom: 12px; }
+.footer-links a { color: rgba(255,255,255,.8); margin-right: 16px; font-size: 13px; }

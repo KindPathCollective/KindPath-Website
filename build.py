@@ -71,6 +71,11 @@ def page(title: str, body: str, active: str = "", description: str = "") -> str:
 <link rel="stylesheet" href="{prefix}assets/style.css">
 </head>
 <body>
+<div class="crisis-banner" role="region" aria-label="Urgent help">
+  <div class="container">
+    <p>In immediate danger? Call <a href="tel:000">000</a>. KindPath is not a crisis service &mdash; <a href="{prefix}get-help.html">see who to call for urgent help</a>.</p>
+  </div>
+</div>
 <header class="site-header">
   <div class="container header-inner">
     <a href="{prefix}index.html" class="brand">
@@ -96,6 +101,7 @@ def page(title: str, body: str, active: str = "", description: str = "") -> str:
     </div>
   </div>
   <div class="container">
+    <p class="footer-links"><a href="{prefix}get-help.html">Get help now</a><a href="{prefix}get-help.html#disclaimer">Not a crisis service</a><a href="{prefix}contact.html#referrals">How referrals work</a></p>
     <p class="footer-legal">&copy; 2026 KindPath Collective Inc. KindPath Collective Inc is building toward NDIS registration; supports are currently delivered under our founders&rsquo; own sole-trader arrangements.</p>
   </div>
 </footer>
@@ -108,12 +114,12 @@ def build_home():
     body = """
 <section class="hero">
   <div class="container">
-    <h1>Advocacy &amp; NDIS Supports</h1>
+    <h1>Advocacy that stays with you</h1>
     <p class="hero-sub">Kind, clear, and on your side.</p>
     <p class="hero-location">Bundjalung Country, Northern NSW</p>
     <div class="hero-actions">
-      <a href="services.html" class="btn btn-primary">Our services</a>
-      <a href="contact.html" class="btn btn-outline">Get in touch</a>
+      <a href="services.html" class="btn btn-primary">How we help</a>
+      <a href="contact.html#referrals" class="btn btn-outline">How referrals work</a>
     </div>
   </div>
 </section>
@@ -123,8 +129,8 @@ def build_home():
     <h2>Our promise</h2>
     <div class="promise-grid">
       <div class="promise-card">
-        <h3>Free social advocacy</h3>
-        <p>Support to understand your rights and be heard, open to anyone, no NDIS plan needed.</p>
+        <h3>One steady presence</h3>
+        <p>When services change and systems don&rsquo;t talk to each other, we stay. Free advocacy, no NDIS plan needed.</p>
       </div>
       <div class="promise-card">
         <h3>Private &mdash; your information stays yours</h3>
@@ -145,7 +151,7 @@ def build_home():
       <div class="service-card">
         <span class="service-status">Available now</span>
         <h3>Free social advocacy</h3>
-        <p>Support to understand your rights and be heard &mdash; open to anyone, no NDIS plan needed.</p>
+        <p>Support to understand your rights and be heard, across whichever systems you&rsquo;re dealing with. No NDIS plan needed.</p>
       </div>
       <div class="service-card">
         <span class="service-status">Available now</span>
@@ -166,9 +172,17 @@ def build_home():
     <p class="section-cta"><a href="services.html">More on how we work &rarr;</a></p>
   </div>
 </section>
+
+<section class="section">
+  <div class="container prose">
+    <h2>How people reach us</h2>
+    <p>We keep our caseload small on purpose, so we can stay with each person for the long haul. That means we work by referral: most people come to us through a support worker, GP, coordinator or local service.</p>
+    <p>If you think we could help you or someone you support, <a href="contact.html#referrals">here&rsquo;s how referrals work</a>. If you need help today, <a href="get-help.html">these services can help right now</a>.</p>
+  </div>
+</section>
 """
     (ROOT / "index.html").write_text(
-        page("Home", body, description="Free NDIS social advocacy, goal and action planning, and support coordination on Bundjalung Country, Northern NSW."),
+        page("Home", body, description="Referral-based advocacy that stays with people across NDIS, health, housing and community services. Bundjalung Country, Northern NSW."),
         encoding="utf-8",
     )
 
@@ -190,6 +204,12 @@ def build_about():
     <p>Our approach starts from the person, not the paperwork: we listen first, then build the plan
     around what actually matters to them.</p>
 
+    <h2>Why we stay small</h2>
+    <p>The service system in our region is fragmented: people are passed between agencies, re-telling their story each time. What&rsquo;s usually missing is someone who stays. That&rsquo;s the job we&rsquo;ve chosen. To do it properly we keep a small, deliberate caseload and work by referral, partnering with other services rather than trying to become one big one.</p>
+
+    <h2>What we&rsquo;re learning</h2>
+    <p>Alongside our practice, we&rsquo;re researching how service fragmentation is actually experienced by practitioners and the people they support across the Northern Rivers, and how it has changed since the NDIS was introduced. We&rsquo;ll share what we find once it has been properly checked. We&rsquo;re not recruiting participants through this website.</p>
+
     <h2>Where we&rsquo;re at</h2>
     <p>KindPath Collective Inc is an incorporated association working toward its own NDIS Quality and
     Safeguards Commission registration. Until that registration is complete, supports are delivered by
@@ -204,7 +224,7 @@ def build_about():
 </section>
 """
     (ROOT / "about.html").write_text(
-        page("About", body, active="about.html", description="KindPath Collective is a broad-spectrum NDIS advocacy service based on Bundjalung Country, Northern NSW."),
+        page("About", body, active="about.html", description="KindPath Collective is a referral-based, broad-spectrum advocacy organisation on Bundjalung Country, Northern NSW."),
         encoding="utf-8",
     )
 
@@ -213,7 +233,14 @@ def build_services():
     body = """
 <section class="section page-header">
   <div class="container">
-    <h1>Our services</h1>
+    <h1>How we help</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container prose">
+    <p>KindPath doesn&rsquo;t specialise in one system. We stay with people across the whole journey &mdash; through NDIS, health, housing, family and community services &mdash; as one consistent presence when everything else feels fragmented. Specialist services do the specialist work; we make sure the person isn&rsquo;t lost between them.</p>
+    <p>We work by referral and keep our caseload deliberately small. <a href="contact.html#referrals">How referrals work</a>.</p>
   </div>
 </section>
 
@@ -223,7 +250,7 @@ def build_services():
       <div class="service-card">
         <span class="service-status">Available now</span>
         <h3>Free social advocacy</h3>
-        <p>Support to understand your rights and be heard &mdash; open to anyone, no NDIS plan needed.</p>
+        <p>Support to understand your rights and be heard, across whichever systems you&rsquo;re dealing with. No NDIS plan needed.</p>
       </div>
       <div class="service-card">
         <span class="service-status">Available now</span>
@@ -267,7 +294,7 @@ def build_services():
 </section>
 """
     (ROOT / "services.html").write_text(
-        page("Services", body, active="services.html", description="Free social advocacy, goal and action planning, NDIS support coordination, and community connection."),
+        page("Services", body, active="services.html", description="How KindPath helps: continuity-of-relationship advocacy across NDIS, health, housing and community services, by referral."),
         encoding="utf-8",
     )
 
@@ -281,8 +308,21 @@ def build_contact():
 </section>
 <section class="section">
   <div class="container prose">
-    <p>However is easiest for you &mdash; email, phone, through a support coordinator, or dropping by.
-    There&rsquo;s no wrong way to reach out.</p>
+    <div class="callout"><strong>Need help right now?</strong> KindPath is not a crisis or 24-hour service. In immediate danger, call <a href="tel:000">000</a>. For other urgent support, see <a href="get-help.html">Get help now</a>.</div>
+
+    <h2 id="referrals">How referrals work</h2>
+    <p>KindPath works by referral. We keep our caseload small so we can stay with each person over time, which means we can&rsquo;t take direct requests from the public. There&rsquo;s still a path to us:</p>
+    <ul class="pathway-list">
+      <li><strong>Already working with a service?</strong> Ask your support worker, support coordinator, case manager or GP to refer you to KindPath.</li>
+      <li><strong>Not connected to any service yet?</strong> A local community service or your GP can talk with you about what you need and refer you on. For disability supports, the <a href="get-help.html">Disability Gateway</a> is a good first call.</li>
+      <li><strong>A service wanting to refer someone?</strong> Email <a href="mailto:sam@kindpathcollective.org?subject=Referral">sam@kindpathcollective.org</a> with &ldquo;Referral&rdquo; in the subject. Please make sure the person knows about and agrees to the referral before you send their details.</li>
+    </ul>
+    <p>If we&rsquo;re not the right fit, or our caseload is full, we&rsquo;ll tell you honestly and help point to someone who is.</p>
+
+    <h2>Referral partners</h2>
+    <p>We work alongside local health, disability, community and government services across the Northern Rivers, and we&rsquo;re building formal referral partnerships now. Details will be listed here once they&rsquo;re confirmed.</p>
+
+    <h2>Contact details</h2>
     <ul class="contact-list">
       <li><strong>Email:</strong> <a href="mailto:sam@kindpathcollective.org">sam@kindpathcollective.org</a></li>
       <li><strong>Location:</strong> 557 Tuntable Falls Road, Nimbin NSW (Bundjalung Country)</li>
@@ -297,7 +337,47 @@ def build_contact():
 </section>
 """
     (ROOT / "contact.html").write_text(
-        page("Contact", body, active="contact.html", description="Get in touch with KindPath Collective."),
+        page("Contact", body, active="contact.html", description="How referrals to KindPath Collective work, and how to contact us."),
+        encoding="utf-8",
+    )
+
+
+def build_get_help():
+    body = """<section class="section page-header">
+  <div class="container">
+    <h1>Get help now</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container prose">
+    <div class="callout"><strong>If you or someone else is in immediate danger, call <a href="tel:000">000</a></strong> (police, ambulance, fire).</div>
+    <p>KindPath is not a crisis or 24-hour service, and we may not see messages quickly. If you need help now, these services can help.</p>
+    <h2>Right now, any time</h2>
+    <ul class="help-list">
+      <li><strong>Lifeline</strong> &mdash; <a href="tel:131114">13 11 14</a><span>Crisis support and suicide prevention, 24/7. Text and online chat also available.</span></li>
+      <li><strong>13YARN</strong> &mdash; <a href="tel:139276">13 92 76</a><span>Crisis support for Aboriginal and Torres Strait Islander people, 24/7, from mob.</span></li>
+      <li><strong>NSW Mental Health Line</strong> &mdash; <a href="tel:1800011511">1800 011 511</a><span>Links you with NSW Health mental health services, 24/7. Also for worried family, friends and workers.</span></li>
+      <li><strong>1800RESPECT</strong> &mdash; <a href="tel:1800737732">1800 737 732</a><span>Sexual assault, domestic and family violence counselling, 24/7.</span></li>
+      <li><strong>Kids Helpline</strong> &mdash; <a href="tel:1800551800">1800 55 1800</a><span>Counselling for young people aged 5 to 25, 24/7.</span></li>
+      <li><strong>Child Protection Helpline (NSW)</strong> &mdash; <a href="tel:132111">132 111</a><span>If you think a child or young person is at risk of significant harm, 24/7.</span></li>
+      <li><strong>Link2home</strong> &mdash; <a href="tel:1800152152">1800 152 152</a><span>NSW homelessness information and referral, 24/7.</span></li>
+      <li><strong>Police (non-emergency)</strong> &mdash; <a href="tel:131444">131 444</a><span>Police assistance when it isn&rsquo;t an emergency.</span></li>
+    </ul>
+    <h2>Business hours</h2>
+    <ul class="help-list">
+      <li><strong>Disability Gateway</strong> &mdash; <a href="tel:1800643787">1800 643 787</a><span>Information and referral for people with disability, families and carers. Monday to Friday, 8am to 8pm AEST.</span></li>
+    </ul>
+    <h2>If you need an interpreter or relay</h2>
+    <p>Call TIS National on <a href="tel:131450">131 450</a> and ask them to connect you to any service above. If you are deaf or have difficulty hearing or speaking, use the National Relay Service &mdash; TTY users call <a href="tel:133677">133 677</a>, Speak and Listen users call <a href="tel:1300555727">1300 555 727</a>, then ask for the number you need.</p>
+    <h2 id="disclaimer">KindPath is not a crisis service</h2>
+    <p>KindPath Collective provides continuity-of-relationship advocacy by referral. We are not a crisis line, emergency service or 24-hour service. If you are in danger, in distress, or need urgent help outside our hours, contact 000 or one of the services above.</p>
+    <p>Using this website, or contacting us through it, does not create a client or support relationship with KindPath. Information on this site is general and isn&rsquo;t a substitute for advice about your own situation.</p>
+    <p class="footer-note" style="color:var(--muted);font-size:13px">Numbers checked 24 September 2026. If a number doesn&rsquo;t work, call 000 in an emergency and <a href="contact.html">let us know</a> so we can fix it.</p>
+  </div>
+</section>
+"""
+    (ROOT / "get-help.html").write_text(
+        page("Get help now", body, active="get-help.html", description="Urgent and after-hours help in NSW. KindPath Collective is not a crisis service."),
         encoding="utf-8",
     )
 
@@ -483,6 +563,21 @@ h3 { font-size: 18px; margin: 0 0 8px; }
   .site-nav { flex-wrap: wrap; justify-content: center; }
   .hero h1 { font-size: 34px; }
 }
+
+/* ---- Urgent help banner + Get Help page (added 24 Sep 2026) ---- */
+.crisis-banner { background: var(--navy-dark); color: #fff; font-size: 14px; }
+.crisis-banner p { margin: 0; padding: 9px 0; text-align: center; }
+.crisis-banner a { color: var(--gold); font-weight: 600; }
+.crisis-banner a:focus-visible, .site-nav a:focus-visible, .btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.help-list { list-style: none; padding: 0; margin: 0 0 24px; }
+.help-list li { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.help-list strong { color: var(--navy); }
+.help-list a[href^="tel"] { font-weight: 700; white-space: nowrap; }
+.help-list span { display: block; color: var(--muted); font-size: 14px; }
+.callout { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 10px; padding: 18px 22px; margin: 24px 0; }
+.pathway-list { padding-left: 22px; }
+.pathway-list li { margin-bottom: 12px; }
+.footer-links a { color: rgba(255,255,255,.8); margin-right: 16px; font-size: 13px; }
 """
     (ROOT / "assets").mkdir(exist_ok=True)
     (ROOT / "assets" / "style.css").write_text(css, encoding="utf-8")
@@ -494,5 +589,6 @@ if __name__ == "__main__":
     build_about()
     build_services()
     build_contact()
+    build_get_help()
     build_policies()
     print("Built site into", ROOT)

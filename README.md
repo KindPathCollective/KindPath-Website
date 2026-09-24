@@ -12,13 +12,14 @@ service based on Bundjalung Country, Northern NSW.
   the templates and content in this script plus `content/policies/`.
 - `assets/` — logo and stylesheet.
 - `policies/` — generated policy pages (do not hand-edit; rebuild instead).
-- `index.html`, `about.html`, `services.html`, `contact.html` — generated
+- `index.html`, `about.html`, `services.html`, `contact.html`, `get-help.html` — generated
   top-level pages (do not hand-edit; rebuild instead).
 
 ## Editing content
 
-Home/About/Services/Contact copy lives directly in `build.py` (see the
-`build_home`, `build_about`, `build_services`, `build_contact` functions).
+Home/About/Services/Contact/Get Help copy lives directly in `build.py` (see the
+`build_home`, `build_about`, `build_services`, `build_contact`, `build_get_help`
+functions).
 Policy copy lives in `content/policies/*.md` — edit the markdown, then
 rebuild.
 
