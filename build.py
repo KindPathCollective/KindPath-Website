@@ -221,8 +221,8 @@ def build_about():
     support is actually delivered. You can read the practice standards we hold ourselves to on our
     <a href="policies/index.html">policies page</a>.</p>
 
-    <h2>Our founder</h2>
-    <p>KindPath was founded by Samuel Cross, based on Bundjalung Country in Nimbin, Northern NSW.</p>
+    <h2>Our founders</h2>
+    <p>KindPath was co-founded by Samuel Cross and Tristina Hay, based on Bundjalung Country in Nimbin, Northern NSW.</p>
   </div>
 </section>
 """
