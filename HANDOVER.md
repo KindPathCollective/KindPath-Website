@@ -36,4 +36,6 @@ No new logo. No "available now" badges. No outcomes, client names, or Life-Field
 
 ## Preview and git
 
+Pull request: https://github.com/KindPathCollective/KindPath-Website/pull/8
+
 GitHub Pages deploys from `main` only, so this pull request has no hosted preview. Review locally with the server command above. Do not force-push. Do not merge until a person has read it. Do not commit secrets or participant data.
