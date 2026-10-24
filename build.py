@@ -60,10 +60,11 @@ def page(title: str, body: str, active: str = "", description: str = "") -> str:
             return href == "policies/index.html"
         return href == ("index.html" if active == "" else active)
 
-    nav_html = "\n".join(
-        f'<a href="{nav_href(href)}" class="{"active" if is_active(href) else ""}">{label}</a>'
-        for href, label in NAV
-    )
+    nav_links = []
+    for href, label in NAV:
+        current = ' class="active" aria-current="page"' if is_active(href) else ""
+        nav_links.append(f'<a href="{nav_href(href)}"{current}>{label}</a>')
+    nav_html = "\n".join(nav_links)
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,6 +75,7 @@ def page(title: str, body: str, active: str = "", description: str = "") -> str:
 <link rel="stylesheet" href="{prefix}assets/style.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="crisis-banner" role="region" aria-label="Urgent help">
   <div class="container">
     <p>In immediate danger? Call <a href="tel:000">000</a>. KindPath is not a crisis service &mdash; <a href="{prefix}get-help.html">see who to call for urgent help</a>.</p>
@@ -82,19 +84,19 @@ def page(title: str, body: str, active: str = "", description: str = "") -> str:
 <header class="site-header">
   <div class="container header-inner">
     <a href="{prefix}index.html" class="brand">
-      <img src="{prefix}assets/kindpath-logo.png" alt="KindPath Collective" class="brand-logo">
+      <img src="{prefix}assets/kindpath-logo.png" alt="KindPath Collective" class="brand-logo" width="831" height="311">
     </a>
-    <nav class="site-nav">{nav_html}</nav>
+    <nav class="site-nav" aria-label="Primary">{nav_html}</nav>
   </div>
 </header>
-<main>
+<main id="main">
 {body}
 </main>
 <footer class="site-footer">
   <div class="container footer-inner">
     <div>
-      <img src="{prefix}assets/kindpath-logo.png" alt="KindPath Collective" class="footer-logo">
-      <p class="footer-tagline">Advocacy that is kind, clear, and on your side.</p>
+      <img src="{prefix}assets/kindpath-logo.png" alt="KindPath Collective" class="footer-logo" width="831" height="311">
+      <p class="footer-tagline">Free, broad-spectrum advocacy and research on Bundjalung Country.</p>
     </div>
     <div class="footer-contact">
       <p>Bundjalung Country, Northern NSW</p>
@@ -113,79 +115,97 @@ def page(title: str, body: str, active: str = "", description: str = "") -> str:
 """
 
 
+def service_lines() -> str:
+    """The four public service lines. Wording stays inside the brief and the existing registration caveat."""
+    return """
+    <ul class="service-grid">
+      <li class="service-card">
+        <h3>Free social advocacy</h3>
+        <p>Free social advocacy via the Life-Field tool. No NDIS plan is needed for this advocacy.</p>
+      </li>
+      <li class="service-card">
+        <h3>NDIS Specialist Support Coordination</h3>
+        <p>Specialist Support Coordination. Registration is still in progress, as noted below.</p>
+      </li>
+      <li class="service-card">
+        <h3>KindPath Succession</h3>
+        <p>Mentoring for people about to leave prison.</p>
+      </li>
+      <li class="service-card">
+        <h3>Social Impact Consultancy</h3>
+        <p>Social impact consultancy, alongside the advocacy and research.</p>
+      </li>
+    </ul>
+    <p class="registration-note">KindPath Collective Inc is building toward NDIS registration. Until that registration is complete, supports are delivered under our founders&rsquo; own sole-trader arrangements.</p>
+"""
+
+
 def build_home():
-    body = """
+    body = f"""
 <section class="hero">
   <div class="container">
-    <h1>Advocacy that stays with you</h1>
-    <p class="hero-sub">Kind, clear, and on your side.</p>
+    <h1>Free, broad-spectrum advocacy and research</h1>
+    <p class="hero-sub">Community authority before programs.</p>
     <p class="hero-location">Bundjalung Country, Northern NSW</p>
     <div class="hero-actions">
-      <a href="services.html" class="btn btn-primary">How we help</a>
+      <a href="#services" class="btn btn-primary">Four service lines</a>
       <a href="contact.html#referrals" class="btn btn-outline">How referrals work</a>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-labelledby="purpose-title">
+  <div class="container prose">
+    <h2 id="purpose-title">What we are here for</h2>
+    <p>KindPath Collective is free, broad-spectrum advocacy and research on Bundjalung Country. Community authority comes before programs.</p>
+    <p>We are not a crisis service. If you need help today, <a href="get-help.html">these services can help right now</a>.</p>
+  </div>
+</section>
+
+<section class="section section-alt" id="services" aria-labelledby="services-title">
   <div class="container">
-    <h2>Our promise</h2>
-    <div class="promise-grid">
-      <div class="promise-card">
+    <h2 id="services-title">Four service lines</h2>
+{service_lines()}
+    <p class="section-cta"><a href="services.html">More on how we work</a></p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="promise-title">
+  <div class="container">
+    <h2 id="promise-title">How we work</h2>
+    <ul class="promise-grid">
+      <li class="promise-card">
         <h3>One steady presence</h3>
         <p>When services change and systems don&rsquo;t talk to each other, we stay. Free advocacy, no NDIS plan needed.</p>
-      </div>
-      <div class="promise-card">
+      </li>
+      <li class="promise-card">
         <h3>Private &mdash; your information stays yours</h3>
         <p>We only share what you consent to, with who you consent to, and nothing else.</p>
-      </div>
-      <div class="promise-card">
+      </li>
+      <li class="promise-card">
         <h3>You&rsquo;re in charge, always</h3>
         <p>Every plan starts from what matters to you &mdash; not the paperwork.</p>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </section>
 
-<section class="section section-alt">
-  <div class="container">
-    <h2>Our services</h2>
-    <div class="service-grid">
-      <div class="service-card">
-        <span class="service-status">Available now</span>
-        <h3>Free social advocacy</h3>
-        <p>Support to understand your rights and be heard, across whichever systems you&rsquo;re dealing with. No NDIS plan needed.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-status">Available now</span>
-        <h3>Goal &amp; action planning</h3>
-        <p>Turning NDIS goals into real, practical plans, built around each person&rsquo;s own interests.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-status">Now, expanding</span>
-        <h3>NDIS support &amp; coordination</h3>
-        <p>Hands-on daily support, with connections to allied health and support coordinators.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-status">Expanding</span>
-        <h3>Community &amp; connection</h3>
-        <p>Helping people build the everyday relationships and community links that matter to them.</p>
-      </div>
-    </div>
-    <p class="section-cta"><a href="services.html">More on how we work &rarr;</a></p>
-  </div>
-</section>
-
-<section class="section">
+<section class="section section-alt" aria-labelledby="reach-title">
   <div class="container prose">
-    <h2>How people reach us</h2>
+    <h2 id="reach-title">How people reach us</h2>
     <p>We keep our caseload small on purpose, so we can stay with each person for the long haul. That means we work by referral: most people come to us through a support worker, GP, coordinator, local service, family member or carer.</p>
-    <p>If you think we could help you or someone you support, <a href="contact.html#referrals">here&rsquo;s how referrals work</a>. If you need help today, <a href="get-help.html">these services can help right now</a>.</p>
+    <p>If you think we could help you or someone you support, <a href="contact.html#referrals">here is how referrals work</a>. If you need help today, <a href="get-help.html">these services can help right now</a>.</p>
+    <h2>Research</h2>
+    <p>Research sits with the advocacy. What we are learning, and the fact that we are not recruiting participants through this website, is on the <a href="about.html">About page</a>.</p>
   </div>
 </section>
 """
     (ROOT / "index.html").write_text(
-        page("Home", body, description="Referral-based advocacy that stays with people across NDIS, health, housing and community services. Bundjalung Country, Northern NSW."),
+        page(
+            "Home",
+            body,
+            description="Free, broad-spectrum advocacy and research on Bundjalung Country. Community authority before programs.",
+        ),
         encoding="utf-8",
     )
 
@@ -233,7 +253,7 @@ def build_about():
 
 
 def build_services():
-    body = """
+    body = f"""
 <section class="section page-header">
   <div class="container">
     <h1>How we help</h1>
@@ -247,57 +267,20 @@ def build_services():
   </div>
 </section>
 
-<section class="section">
+<section class="section" aria-labelledby="service-lines-title">
   <div class="container">
-    <div class="service-grid">
-      <div class="service-card">
-        <span class="service-status">Available now</span>
-        <h3>Free social advocacy</h3>
-        <p>Support to understand your rights and be heard, across whichever systems you&rsquo;re dealing with. No NDIS plan needed.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-status">Available now</span>
-        <h3>Goal &amp; action planning</h3>
-        <p>Turning NDIS goals into real, practical plans, built around each person&rsquo;s own interests.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-status">Now, expanding</span>
-        <h3>NDIS support &amp; coordination</h3>
-        <p>Hands-on daily support, with connections to allied health and support coordinators.</p>
-      </div>
-      <div class="service-card">
-        <span class="service-status">Expanding</span>
-        <h3>Community &amp; connection</h3>
-        <p>Helping people build the everyday relationships and community links that matter to them.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt">
-  <div class="container">
-    <h2>NDIS support, in practice</h2>
-    <div class="promise-grid">
-      <div class="promise-card">
-        <h3>Plan navigation</h3>
-        <p>Making sense of a plan&rsquo;s funding categories and what they can actually be used for.</p>
-      </div>
-      <div class="promise-card">
-        <h3>Allied health &amp; support coordinator links</h3>
-        <p>Working alongside a person&rsquo;s existing support coordinator and any allied health
-        professionals, with clear consent for what&rsquo;s shared and with whom.</p>
-      </div>
-      <div class="promise-card">
-        <h3>Goals into action</h3>
-        <p>Every goal becomes a written, practical plan, built around a person&rsquo;s own gear,
-        interests and routine &mdash; not a generic template.</p>
-      </div>
-    </div>
+    <h2 id="service-lines-title">Four service lines</h2>
+{service_lines()}
   </div>
 </section>
 """
     (ROOT / "services.html").write_text(
-        page("Services", body, active="services.html", description="How KindPath helps: continuity-of-relationship advocacy across NDIS, health, housing and community services, by referral."),
+        page(
+            "Services",
+            body,
+            active="services.html",
+            description="KindPath's four service lines: free social advocacy, NDIS Specialist Support Coordination, KindPath Succession, and Social Impact Consultancy.",
+        ),
         encoding="utf-8",
     )
 
@@ -471,116 +454,230 @@ def build_policies():
 def build_css():
     css = """
 :root {
-  --navy: #0e3a5e;
-  --navy-dark: #081726;
-  --navy-light: #144b78;
-  --gold: #f5b90a;
-  --sage: #9cbc8a;
-  --ink: #1e2a33;
-  --muted: #5b6670;
-  --bg: #f7f9fb;
+  --navy: #154A73;
+  --yellow: #F7BC0D;
+  --ink: #1a242c;
+  --muted: #3d4c59;
+  --bg: #f4f7f8;
   --surface: #ffffff;
-  --border: #e3ebf2;
+  --border: #d5e0e8;
+  --on-navy: #ffffff;
+  --on-navy-soft: #e7eef3;
 }
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+:target { scroll-margin-top: 11.5rem; }
 body {
-  margin: 0; font-family: -apple-system, 'Inter', system-ui, sans-serif;
-  color: var(--ink); background: var(--bg); line-height: 1.6;
+  margin: 0;
+  font-family: -apple-system, 'Inter', system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.6;
+  font-size: 1.0625rem;
 }
-.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-a { color: var(--navy-light); }
-h1, h2, h3 { color: var(--navy); line-height: 1.25; }
-h1 { font-size: 40px; margin: 0 0 8px; }
-h2 { font-size: 26px; margin: 0 0 20px; }
-h3 { font-size: 18px; margin: 0 0 8px; }
+img { max-width: 100%; }
+.container { width: min(67.5rem, 100%); margin-inline: auto; padding-inline: 1rem; }
+a { color: var(--navy); text-decoration: underline; text-underline-offset: 0.15em; }
+h1, h2, h3 { color: var(--navy); line-height: 1.25; text-align: left; }
+h1 { font-size: clamp(1.75rem, 4vw + 1rem, 2.75rem); margin: 0 0 0.5rem; }
+h2 { font-size: clamp(1.35rem, 1.5vw + 1rem, 1.7rem); margin: 0 0 1rem; }
+h3 { font-size: 1.125rem; margin: 0 0 0.4rem; }
 
-.site-header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
-.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
-.brand-logo { height: 40px; display: block; }
-.site-nav { display: flex; gap: 24px; }
-.site-nav a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 14px; padding: 6px 0; border-bottom: 2px solid transparent; }
-.site-nav a:hover, .site-nav a.active { color: var(--navy); border-bottom-color: var(--gold); }
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: 0;
+  transform: translateY(-120%);
+  background: var(--yellow);
+  color: var(--navy);
+  border: 2px solid var(--navy);
+  padding: 0.6rem 0.9rem;
+  z-index: 30;
+  font-weight: 700;
+  text-decoration: none;
+}
+.skip-link:focus { transform: none; top: 0.5rem; }
 
-.hero { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-dark) 100%); color: #fff; padding: 90px 0 70px; text-align: center; }
-.hero h1 { color: #fff; font-size: 48px; margin-bottom: 12px; }
-.hero-sub { font-size: 22px; color: var(--gold); font-style: italic; margin: 0 0 6px; }
-.hero-location { color: rgba(255,255,255,.7); margin: 0 0 32px; font-size: 14px; }
-.hero-actions { display: flex; gap: 16px; justify-content: center; }
+.site-header {
+  background: var(--surface);
+  border-bottom: 3px solid var(--navy);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding-block: 0.75rem;
+}
+.brand-logo { display: block; height: 44px; width: auto; max-width: 70vw; }
+.site-nav { display: flex; flex-wrap: wrap; gap: 0.15rem 0.85rem; width: 100%; }
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.1rem;
+  border-bottom: 3px solid transparent;
+}
+.site-nav a:hover, .site-nav a.active { color: var(--navy); border-bottom-color: var(--navy); }
 
-.btn { display: inline-block; padding: 12px 28px; border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 15px; }
-.btn-primary { background: var(--gold); color: var(--navy-dark); }
-.btn-primary:hover { filter: brightness(1.06); }
-.btn-outline { border: 1.5px solid rgba(255,255,255,.5); color: #fff; }
-.btn-outline:hover { border-color: #fff; }
+.hero { background: var(--navy); color: var(--on-navy); padding: 2.5rem 0 2.25rem; text-align: center; }
+.hero h1, .hero h2, .hero h3 { color: var(--on-navy); text-align: center; }
+.hero-sub { font-size: 1.25rem; color: var(--yellow); font-weight: 700; margin: 0 0 0.35rem; }
+.hero-location { color: var(--on-navy-soft); margin: 0 0 1.5rem; font-size: 1rem; }
+.hero-actions { display: flex; flex-direction: column; gap: 0.75rem; align-items: stretch; }
 
-.section { padding: 64px 0; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.7rem 1.25rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+.btn-primary { background: var(--yellow); color: var(--navy); border: 2px solid var(--navy); }
+.btn-primary:hover { background: #fff; }
+.btn-outline { border: 2px solid var(--on-navy); color: var(--on-navy); background: transparent; }
+.btn-outline:hover { background: rgba(255,255,255,.12); }
+
+.section { padding: 2.5rem 0; }
 .section-alt { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.section h2 { text-align: center; }
-.page-header { padding: 56px 0 8px; }
+.page-header { padding: 2rem 0 0.25rem; }
 .page-header h1 { margin-bottom: 0; }
 
-.promise-grid, .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
-.service-grid { grid-template-columns: repeat(2, 1fr); }
+.promise-grid, .service-grid {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
 .promise-card, .service-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--navy);
+  border-radius: 14px;
+  padding: 1.15rem 1.15rem 1.25rem;
 }
-.service-status {
-  display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
-  color: var(--navy); background: rgba(156,188,138,.25); padding: 3px 10px; border-radius: 999px; margin-bottom: 10px;
+.registration-note {
+  margin: 1.25rem 0 0;
+  padding: 1rem 1.1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--navy);
+  border-radius: 10px;
+  max-width: 46rem;
 }
-.section-cta { text-align: center; margin-top: 32px; }
-.section-cta a { font-weight: 600; text-decoration: none; }
+.section-cta { margin-top: 1.5rem; }
+.section-cta a { font-weight: 700; }
 
-.prose { max-width: 760px; margin: 0 auto; }
-.prose h2 { margin-top: 40px; }
-.prose p { margin: 0 0 16px; }
+.prose { max-width: 42rem; }
+.prose h2 { margin-top: 2rem; }
+.prose > h2:first-child { margin-top: 0; }
+.prose p { margin: 0 0 1rem; }
 .contact-list { list-style: none; padding: 0; }
-.contact-list li { padding: 6px 0; border-bottom: 1px solid var(--border); }
+.contact-list li { padding: 0.55rem 0; border-bottom: 1px solid var(--border); }
 
-.policy-modules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 48px; }
-.policy-module h3 { color: var(--navy); border-bottom: 2px solid var(--gold); padding-bottom: 8px; }
+.policy-modules { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+.policy-module h3 { color: var(--navy); border-bottom: 3px solid var(--navy); padding-bottom: 0.4rem; }
 .policy-list { list-style: none; padding: 0; margin: 0; }
-.policy-list li { padding: 6px 0; }
-.policy-list a { text-decoration: none; color: var(--ink); font-size: 14px; }
-.policy-list a:hover { color: var(--navy-light); text-decoration: underline; }
+.policy-list li { padding: 0.35rem 0; }
+.policy-list a { color: var(--ink); }
 
-.breadcrumb a { text-decoration: none; font-size: 13px; color: var(--muted); }
-.policy-doc h1 { font-size: 26px; }
-.policy-doc h2 { font-size: 18px; text-align: left; margin-top: 28px; }
-.policy-doc ul, .policy-doc ol { padding-left: 22px; }
-.policy-doc table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
-.policy-doc th, .policy-doc td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+.breadcrumb a { font-size: 0.95rem; color: var(--muted); }
+.policy-doc { overflow-x: auto; }
+.policy-doc h1 { font-size: 1.6rem; }
+.policy-doc h2 { font-size: 1.15rem; margin-top: 1.6rem; }
+.policy-doc ul, .policy-doc ol { padding-left: 1.25rem; }
+.policy-doc table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+.policy-doc th, .policy-doc td { border: 1px solid var(--border); padding: 0.5rem 0.6rem; text-align: left; vertical-align: top; }
 .policy-doc th { background: var(--bg); }
 
-.site-footer { background: var(--navy-dark); color: rgba(255,255,255,.85); padding: 40px 0 20px; margin-top: 40px; }
-.footer-inner { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-.footer-logo { height: 34px; filter: brightness(0) invert(1); opacity: .9; margin-bottom: 10px; }
-.footer-tagline { font-style: italic; color: var(--gold); margin: 0; }
-.footer-contact p { margin: 2px 0; font-size: 14px; }
-.footer-contact a { color: #fff; }
-.footer-legal { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 28px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.12); }
-
-@media (max-width: 720px) {
-  .promise-grid, .service-grid, .policy-modules { grid-template-columns: 1fr; }
-  .header-inner { flex-direction: column; gap: 10px; }
-  .site-nav { flex-wrap: wrap; justify-content: center; }
-  .hero h1 { font-size: 34px; }
+.site-footer { background: var(--navy); color: var(--on-navy-soft); padding: 2.5rem 0 1.25rem; margin-top: 2rem; }
+.footer-inner { display: flex; flex-direction: column; gap: 1.5rem; }
+.footer-logo {
+  display: block;
+  height: 44px;
+  width: auto;
+  max-width: 70vw;
+  background: #fff;
+  padding: 6px 8px;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+.footer-tagline { color: var(--yellow); font-weight: 700; margin: 0; max-width: 28rem; }
+.footer-contact p { margin: 0.15rem 0; font-size: 1rem; }
+.footer-contact a { color: var(--on-navy); }
+.footer-legal {
+  font-size: 0.875rem;
+  color: var(--on-navy-soft);
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,.45);
+}
+.footer-links a {
+  color: var(--on-navy);
+  display: inline-block;
+  margin: 0.15rem 1rem 0.15rem 0;
+  padding-block: 0.45rem;
 }
 
-/* ---- Urgent help banner + Get Help page (added 24 Sep 2026) ---- */
-.crisis-banner { background: var(--navy-dark); color: #fff; font-size: 14px; }
-.crisis-banner p { margin: 0; padding: 9px 0; text-align: center; }
-.crisis-banner a { color: var(--gold); font-weight: 600; }
-.crisis-banner a:focus-visible, .site-nav a:focus-visible, .btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
-.help-list { list-style: none; padding: 0; margin: 0 0 24px; }
-.help-list li { padding: 12px 0; border-bottom: 1px solid var(--border); }
+.crisis-banner { background: var(--navy); color: var(--on-navy); font-size: 1rem; }
+.crisis-banner p { margin: 0; padding: 0.7rem 0; text-align: center; }
+.crisis-banner a { color: var(--yellow); font-weight: 700; }
+:focus-visible { outline: 3px solid var(--navy); outline-offset: 3px; }
+.hero :focus-visible,
+.site-footer :focus-visible,
+.crisis-banner :focus-visible { outline-color: var(--yellow); }
+.help-list { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+.help-list li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); }
 .help-list strong { color: var(--navy); }
-.help-list a[href^="tel"] { font-weight: 700; white-space: nowrap; }
-.help-list span { display: block; color: var(--muted); font-size: 14px; }
-.callout { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--gold); border-radius: 10px; padding: 18px 22px; margin: 24px 0; }
-.pathway-list { padding-left: 22px; }
-.pathway-list li { margin-bottom: 12px; }
-.footer-links a { color: rgba(255,255,255,.8); margin-right: 16px; font-size: 13px; }
+.help-list a[href^="tel"] { font-weight: 700; }
+.help-list span { display: block; color: var(--muted); font-size: 0.95rem; }
+.callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--navy);
+  border-radius: 10px;
+  padding: 1rem 1.15rem;
+  margin: 0 0 1.5rem;
+}
+.pathway-list { padding-left: 1.25rem; }
+.pathway-list li { margin-bottom: 0.75rem; }
+
+@media (min-width: 40rem) {
+  .hero-actions { flex-direction: row; justify-content: center; }
+  .hero-actions .btn { width: auto; }
+  .service-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 48rem) {
+  :target { scroll-margin-top: 6rem; }
+  .container { padding-inline: 1.5rem; }
+  .header-inner { flex-direction: row; align-items: center; justify-content: space-between; }
+  .site-nav { width: auto; justify-content: flex-end; }
+  .brand-logo, .footer-logo { height: 48px; }
+  .section { padding: 4rem 0; }
+  .hero { padding: 4.5rem 0 3.5rem; }
+  .policy-modules { grid-template-columns: 1fr 1fr; gap: 2rem 3rem; }
+  .footer-inner { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+}
+@media (min-width: 64rem) {
+  .promise-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 """
     (ROOT / "assets").mkdir(exist_ok=True)
     (ROOT / "assets" / "style.css").write_text(css, encoding="utf-8")
