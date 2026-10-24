@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: '3.12'
 
-      - run: pip install markdown
+      - run: pip install -r requirements.txt
       - run: python build.py
 
       - uses: actions/configure-pages@v5

@@ -1,7 +1,7 @@
 # KindPath Collective — Public Website
 
-Static site for KindPath Collective Inc: an NDIS advocacy and support
-service based on Bundjalung Country, Northern NSW.
+Static site for KindPath Collective Inc: free, broad-spectrum advocacy
+and research on Bundjalung Country, Northern NSW.
 
 ## Structure
 
@@ -29,8 +29,12 @@ rebuild.
 python build.py
 ```
 
-Regenerates all HTML from the current content. No other build step or
-dependency beyond `pip install markdown`.
+Regenerates all HTML from the current content. Install the one dependency
+first:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Previewing locally
 
